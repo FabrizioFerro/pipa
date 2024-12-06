@@ -21,6 +21,7 @@ antares: HIP 80763
 acrux: HIP 60718
 THE SUN: -1 (Note: The Sun does not have a HIP Number)
 """
+# http://simbad.u-strasbg.fr/simbad/sim-fbasic
 
 # #################### Parameters and Variables #################### #
 
@@ -114,6 +115,7 @@ scene.ambient = vp.color.gray(0.1)
 
 scene.autoscale = False
 scene.userzoom = False
+scene.userpan = False
 scene.camera.pos = vp.vector(0, 0, 0)
 scene.up = vp.vector(0, 0, 1)
 scene.forward = vp.vector(1, 0, 0)
@@ -139,8 +141,8 @@ for i in range(0, len(df) + 1):
         R = R_r0 * (L_list[i] / (4 * np.pi * vp.mag2(r_list[i] - r_list[j]) * F_r0)) ** (1 / 2)
         mag_rel = m_r0 + 2.5 * np.log10((4 * np.pi * vp.mag2(r_list[i] - r_list[j]) * F_r0) / L_list[i])
         Xtars.append(vp.sphere(pos=((r_list[i] - r_list[j]) / vp.mag(r_list[i] - r_list[j])) * R_sky,
-                               radius=R, luminosity=L_list[i], relative_magnitude=mag_rel,
-                               default_color=vp.color.white, emissive=True))
+                               radius=R, luminosity=L_list[i], relative_magnitude=mag_rel, color=vp.vector(1, 1, 1),
+                               default_color=vp.vector(1, 1, 1), emissive=True))
         # THE SUN
         if i == 0:
             Xtars[i].color = vp.vector(0, 1, 0)
