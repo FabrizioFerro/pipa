@@ -4,6 +4,8 @@
 
 ![alphacentauriA](/images/HIP71683.png)
 
+The image above is a portion of the sky as seen from Alpha Centauri A (HIP 71683). Our star, the Sun, is shown in green for reference.
+
 ## Installation
 The following libraries are required to run this project. The versions specified below have been tested for compatibility and are recommended for optimal performance:
 
