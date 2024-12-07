@@ -1,5 +1,4 @@
 # PIPA
-
 **PIPA** (Planetarium with Interstellar Positional Astronomy) is a free open source planetarium program based entirely on **Python3**. It uses the astrometric data from the **High Precision PARallax COllecting Satellite (Hipparcos)** mission to show in 3D what the sky from other stars would look like.
 
 ![alphacentauriA](/images/HIP71683.png)
@@ -36,6 +35,17 @@ We recommend creating a new Conda environment to manage dependencies and avoid c
     ```
     conda list
     ```
+
+## Instructions
+The code is pretty self-contained; just run ``pipa.py`` and a navigable 3D sky should start running in a browser window. If you want to see what the sky looks like from other stars, set `C_star` to the HIP ID of the star of interest. Note that the our Sun does not have a HIP ID, so set `C_star = -1` if you want to see the sky from Earth. If you want to render more stars, set `m_filt` to the largest apparent magnitude you want to be displayed.
+
+```python
+# Filtering Variables
+m_filt = 6.5 # 6 is around the naked-eye limit
+
+# HIP Number of the Center Star
+C_star = 71683 # The Sun: -1
+```
 
 ## Acknowledgments
 This project made use of data from the **High Precision PARallax COllecting Satellite (Hipparcos)** mission. We specifically utilized the data published in:
