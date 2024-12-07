@@ -48,7 +48,7 @@ R_r0 = 1
 F_r0 = F_sun * 10 ** ((m_sun - m_r0) / 2.5)
 
 # Filtering Variables
-m_filt = 6.5 # best 5.5
+m_filt = 6.5 # 6 is around the naked-eye limit
 
 # HIP Number of the Center Star
 C_star = 71683 # The Sun: -1
@@ -61,7 +61,7 @@ with load.open(hipparcos.URL) as f:  # Load Hipparcos Catalog
 # Filtering
 df = df[df['ra_degrees'].notnull()]
 df = df[df['magnitude'] <= m_filt]
-print(f'After filtering, there are {len(df)} stars')
+# print(f'After filtering, there are {len(df)} stars')
 
 bright_stars = Star.from_dataframe(df)
 
@@ -95,12 +95,12 @@ for i in range(0, len(df)):
 
 # #################### Set up Scene and Lighting #################### #
 
-win = 700
-scene = vp.canvas(title=f"<h1><b>The Sky as Seen From HIP {C_star}</b></h1>", width=1.5*win, height=win)
+win = 710
+scene = vp.canvas(title=f"<pre><h1><b>The Sky as Seen From HIP {C_star}</b></h1></pre>", width=1.5*win, height=win)
 # scene.append_to_title("<div id='fps'/>")
-scene.caption = """
+scene.caption = """<pre>
 <b>Drag with Right Click to Rotate</b>
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::
 Reference Stars
 Alpha Centauri A: Yellow
 Sirius: Light Blue
@@ -109,6 +109,21 @@ Betelgeuse: Red
 Rigel: Blue
 Antares: Orange
 The Sun: Green
+*     .       .   *    .    *       .  *     .    *     *     .       .   *    .    *       .  *     .    *     .  *     .  *   .     *       .    *  .     .   *     .     *      .    *      .   *       .      *    . 
+  .  *     .  *   .     *       .    *  .     .   *     .     *      .    *      .   *       .      *    .        .     * .    * .       .    *  .       *      .     .   .    *    .    *       .    *    .       .   * 
+     .     * .    * .       .    *  .       *      .     .   .    *    .    *       .    *    .       .   *     .        .    *   .       *   .  *    .    *   *      .      *    .  .    *    *     .     .    *    .
+  .    *      .     .  *   .       *  .    *       .    *     *    .     *    .   *      .     .  *    .     .   *     .    *     .     *   .   .    *   .   *      .  .    *      *   .    .    *   *   .     .   *    .
+*        .  *    .   .      *    .    *    .     *     *     .   .    *    .   .     .      *  .    *         .    *    .      * .  .       .      *   *    .  *       .   .    *   .    .  .   *     .     .    
+      .   *      *      .     .    *      .  *    .   .    *    .    *    .  .   *   .  *     .  *     .    .   *       .    *      .    *   .  *   .    *    .    *       .    .    *  .     .   *    .     .    .   *   
+    .  *   .  *    .        *   .    .    *     .   .    *  .     .    *    *    .     *     .   .    *  *      .    .    *   .     .    *   .   *    .  .    *    *   .   *    .    .  .     .    *    .     *     .  
+.        .      *    .   *      .    *   .   .     *   .  *    .   .      *   .   . *    *  .   *    .         *    .      .  *    *   .  *    .    *   .    .  *     .     .    *     *   .    .   .    *      *  .   *
+  *     .   .      .  *      .     *   .  *    .    .      .    *      .    .   .     .   .     *     .      .   .    *       .    *   .    .    *     .   .   *      .  *  .     .   *   *    .   .  *  .   *     .   *
+ ____ ___ ____   _    
+|  _ \_ _|  _ \ / \   
+| |_) | || |_) / _ \  
+|  __/| ||  __/ ___ \ 
+|_|  |___|_| /_/   \_\ by Fabrizio Melges Ferro
+</pre>       
 """
 scene.lights = []
 scene.ambient = vp.color.gray(0.1)
@@ -192,8 +207,19 @@ for i in range(0, len(df) + 1):
 
 # #################### Stuff #################### #
 #print(df.index.get_loc(C_star)+1)
-print(j)
-print(stars_dict_lum_index['polaris'])
-print(stars_dict_lum_index['sirius'])
+print("""
+ ____ ___ ____   _    
+|  _ \_ _|  _ \ / \   
+| |_) | || |_) / _ \  
+|  __/| ||  __/ ___ \ 
+|_|  |___|_| /_/   \_\ by Fabrizio Melges Ferro
+===============================================""")
+print(f'After filtering, there are {len(df)} stars')
 
+if C_star <= 0:
+    print('You are on Earth!')
+else:
+    print(f'You are on HIP {C_star}')
+    print(f"The Sun's apparent magnitude is {Xtars[0].relative_magnitude:.2f}")
+print('')
 # TODO: color dictionary
